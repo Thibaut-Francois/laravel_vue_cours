@@ -1,0 +1,58 @@
+<template>
+
+    <MusicLayout>
+        <template #title>
+            Créer une musique
+        </template>
+
+        <template #action>
+            <Link
+            :href="route('tracks.index')">
+                Retour
+            </Link>
+        </template>
+
+        <template #content>
+
+        </template>
+    </MusicLayout>
+</template>
+
+<script>
+import MusicLayout from '@/Layouts/MusicLayout.vue'
+import {Link} from '@inertiajs/vue3'
+
+export default{
+    components: {
+        MusicLayout,
+        Link,
+    }
+}
+</script>
+
+
+
+<style scoped>
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+    li{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+    }
+    li:hover{
+        background: #8cc0eb;
+        color: white;
+        cursor: pointer;
+    }
+    h3{
+        margin: 0;
+    }
+    p{
+        margin: 0;
+    }
+</style>
