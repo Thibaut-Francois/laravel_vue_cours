@@ -26,6 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'admin',
         'password',
     ];
 
@@ -36,6 +37,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'admin',
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
@@ -58,4 +60,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function playlists(){
+        return $this->hasMany(Playlist::class);
+    }
 }

@@ -21,8 +21,10 @@ class TrackFactory extends Factory
             'uuid' => 'trk-' . Str::uuid(),
             'title' => $this->faker->sentence(3),
             'artist'=> $this->faker->name(),
-            'image' => '',
-            'music' => '',
+            // 'image' => '',
+            // 'music' => '',
+            'image' => 'tracks/images/pac.jpg',
+            'music' => 'tracks/music/aaa.mp3',
             'display' => true,
             'play_count' => 0,
         ];

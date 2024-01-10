@@ -2,7 +2,7 @@
 
     <MusicLayout>
         <template #title>
-            Créer une musique
+            Modifier la musique {{ track.title }}
         </template>
 
         <template #action>
@@ -18,7 +18,7 @@
 
             <form @submit.prevent="submit">
 
-                 <!-- ---------------- Titre -->
+                <!-- ---------------- Titre -->
                 <div class="mb-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                     Titre
@@ -34,7 +34,7 @@
                 <p class="text-red-500 text-xs italic">{{ form.errors.title }}</p>
                 </div>
 
-                 <!-- ---------------- artist -->
+                <!-- ---------------- artist -->
                 <div class="mb-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="artist">
                     Artist
@@ -48,38 +48,6 @@
                     placeholder="Artist"
                 >
                 <p class="text-red-500 text-xs italic">{{ form.errors.artist }}</p>
-                </div>
-
-                 <!-- ---------------- image -->
-                <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
-                    Image
-                </label>
-                <input
-                    id="image"
-                    @input="form.image =$event.target.files[0]"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    :class="{'border-red-500': form.errors.image}"
-                    type="file"
-                    placeholder="Image"
-                >
-                <p class="text-red-500 text-xs italic">{{ form.errors.image }}</p>
-                </div>
-
-                 <!-- ---------------- music -->
-                <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="music">
-                    Musique
-                </label>
-                <input
-                    id="music"
-                    @input="form.music =$event.target.files[0]"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    :class="{'border-red-500': form.errors.music}"
-                    type="file"
-                    placeholder="Musique"
-                >
-                <p class="text-red-500 text-xs italic">{{ form.errors.music }}</p>
                 </div>
 
                 <!-- ---------------- display -->
@@ -100,7 +68,7 @@
                 <p class="text-red-500 text-xs italic">{{ form.errors.display }}</p>
                 </div>
 
-                <input type="submit" value="créer la musique" class="bg-blue-500 text-white font-bold py-2 px-4">
+                <input type="submit" value="Modifier" class="bg-blue-500 text-white font-bold py-2 px-4">
 
                 {{ form }}
             </form>
@@ -117,21 +85,22 @@ export default{
         MusicLayout,
         Link,
     },
+    props:{
+        track:Object,
+    },
     data(){
         return{
             // test: '',
             form: this.$inertia.form({
-                title:'',
-                artist: '',
-                image: null,
-                music: null,
-                display: true,
+                title: this.track.title,
+                artist: this.track.artist,
+                display: this.track.display ? true : false,
             }),
         }
     },
     methods:{
         submit(){
-            this.form.post(route('tracks.store'));
+            this.form.put(route('tracks.update', {track: this.track}));
         }
     }
 }
