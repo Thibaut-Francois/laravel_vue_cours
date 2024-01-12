@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiKeyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrackController;
@@ -23,6 +24,11 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'])->group(function () {
     Route::resource('playlists', PlaylistController::class);
+
+    Route::get('/apikeys', [ApiKeyController::class, 'index'])->name('apiKeys.index');
+    Route::get('/apikeys/create', [ApiKeyController::class, 'create'])->name('apiKeys.create');
+    Route::post('/apikeys', [ApiKeyController::class, 'store'])->name('apiKeys.store');
+    Route::get('/apikeys/{apikey}', [ApiKeyController::class, 'destroy'])->name('apiKeys.destroy');
 
     Route::middleware(['admin'])->group(function(){
         Route::get('/tracks/create', [TrackController::class, 'create'])->name('tracks.create');
